@@ -1,0 +1,18 @@
+{
+    "require": {
+        "symfony/var-dumper": "^6.3",
+        "symfony/orm-pack": "^2.3",
+        "doctrine/orm": "^2.15",
+        "illuminate/database": "^10.15"
+    },
+    "autoload": {
+        "files": [
+            "helper/helper_class.php",
+            "helper/helper_class.php",
+            "Models/User.php"
+        ]
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.50"
+    }
+}
