@@ -3,13 +3,16 @@
         "symfony/var-dumper": "^6.3",
         "symfony/orm-pack": "^2.3",
         "doctrine/orm": "^2.15",
-        "illuminate/database": "^10.15"
+        "illuminate/database": "^10.15",
+        "illuminate/validation": "^8.25",
+        "illuminate/translation": "^8.25"
     },
     "autoload": {
         "files": [
             "helper/helper_class.php",
             "helper/helper_class.php",
-            "Models/User.php"
+            "Models/User.php",
+            "Models/customer.php"
         ]
     },
     "require-dev": {

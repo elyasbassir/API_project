@@ -4,7 +4,7 @@ require_once 'vendor/autoload.php';
 use Illuminate\Database\Capsule\Manager as Capsule;
 use my_class\helper_class;
 use Models\User;
-
+use Models\customer;
 $capsule = new Capsule();
 $capsule->addConnection([
     'driver' => 'mysql',
@@ -19,18 +19,24 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if(helper_class::address_request() == "/login"){
-        $save = new User();
-        $save->name= "elyas";
-        $save->phone= '09152655133';
-        $save->email= "asdasd@gmail.com";
-        $save->save();
-    }elseif(helper_class::address_request() == "/register"){
-        dd('register');
-    }else{
-        dd('error');
+    if (helper_class::address_request() == "/login") {
+        if($_REQUEST['email'] !=="" && filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL) && $_REQUEST['name']!=="" && strlen($_REQUEST['name']) < 20 && $_REQUEST['phone']!=="" && strlen($_REQUEST['phone']) < 20){
+            $save_data = new customer();
+            $save_data->name = htmlspecialchars($_REQUEST['name']);
+            $save_data->phone = htmlspecialchars($_REQUEST['phone']);
+            $save_data->email = htmlspecialchars($_REQUEST['email']);
+            $save_data->save();
+            echo json_encode(['message'=>'successfully']);
+        }else{
+            dd('validation error!');
+        }
+    } elseif (helper_class::address_request() == "/show_customer") {
+        foreach (customer::all() as $key=>$data){
+            echo json_encode($data);
+        }
+    } else {
+        return json_encode(['error'=>'route not found']);
     }
 
 
